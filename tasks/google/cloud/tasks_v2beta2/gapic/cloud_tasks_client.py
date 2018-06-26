@@ -60,6 +60,14 @@ class CloudTasksClient(object):
     _INTERFACE_NAME = 'google.cloud.tasks.v2beta2.CloudTasks'
 
     @classmethod
+    def project_path(cls, project):
+        """Return a fully-qualified project string."""
+        return google.api_core.path_template.expand(
+            'projects/{project}',
+            project=project,
+        )
+
+    @classmethod
     def location_path(cls, project, location):
         """Return a fully-qualified location string."""
         return google.api_core.path_template.expand(
@@ -187,13 +195,15 @@ class CloudTasksClient(object):
             >>>
             >>> parent = client.location_path('[PROJECT]', '[LOCATION]')
             >>>
-            >>>
             >>> # Iterate over all results
             >>> for element in client.list_queues(parent):
             ...     # process element
             ...     pass
             >>>
-            >>> # Or iterate over results one page at a time
+            >>>
+            >>> # Alternatively:
+            >>>
+            >>> # Iterate over results one page at a time
             >>> for page in client.list_queues(parent, options=CallOptions(page_token=INITIAL_PAGE)):
             ...     for element in page:
             ...         # process element
@@ -258,10 +268,17 @@ class CloudTasksClient(object):
             filter=filter_,
             page_size=page_size,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('parent', parent)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('parent', parent)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         iterator = google.api_core.page_iterator.GRPCIterator(
             client=None,
@@ -331,10 +348,17 @@ class CloudTasksClient(object):
                 )
 
         request = cloudtasks_pb2.GetQueueRequest(name=name, )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('name', name)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('name', name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['get_queue'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -422,10 +446,17 @@ class CloudTasksClient(object):
             parent=parent,
             queue=queue,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('parent', parent)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('parent', parent)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['create_queue'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -515,11 +546,17 @@ class CloudTasksClient(object):
             queue=queue,
             update_mask=update_mask,
         )
-
-        if hasattr(queue, 'name'):
-            routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-                [('queue.name', queue.name)], )
-            metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('queue.name', queue.name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['update_queue'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -587,10 +624,17 @@ class CloudTasksClient(object):
                 )
 
         request = cloudtasks_pb2.DeleteQueueRequest(name=name, )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('name', name)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('name', name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         self._inner_api_calls['delete_queue'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -654,10 +698,17 @@ class CloudTasksClient(object):
                 )
 
         request = cloudtasks_pb2.PurgeQueueRequest(name=name, )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('name', name)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('name', name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['purge_queue'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -722,10 +773,17 @@ class CloudTasksClient(object):
                 )
 
         request = cloudtasks_pb2.PauseQueueRequest(name=name, )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('name', name)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('name', name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['pause_queue'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -796,10 +854,17 @@ class CloudTasksClient(object):
                 )
 
         request = cloudtasks_pb2.ResumeQueueRequest(name=name, )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('name', name)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('name', name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['resume_queue'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -865,10 +930,17 @@ class CloudTasksClient(object):
                 )
 
         request = iam_policy_pb2.GetIamPolicyRequest(resource=resource, )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('resource', resource)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('resource', resource)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['get_iam_policy'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -949,10 +1021,17 @@ class CloudTasksClient(object):
             resource=resource,
             policy=policy,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('resource', resource)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('resource', resource)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['set_iam_policy'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -1029,10 +1108,17 @@ class CloudTasksClient(object):
             resource=resource,
             permissions=permissions,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('resource', resource)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('resource', resource)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['test_iam_permissions'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -1060,13 +1146,15 @@ class CloudTasksClient(object):
             >>>
             >>> parent = client.queue_path('[PROJECT]', '[LOCATION]', '[QUEUE]')
             >>>
-            >>>
             >>> # Iterate over all results
             >>> for element in client.list_tasks(parent):
             ...     # process element
             ...     pass
             >>>
-            >>> # Or iterate over results one page at a time
+            >>>
+            >>> # Alternatively:
+            >>>
+            >>> # Iterate over results one page at a time
             >>> for page in client.list_tasks(parent, options=CallOptions(page_token=INITIAL_PAGE)):
             ...     for element in page:
             ...         # process element
@@ -1138,10 +1226,17 @@ class CloudTasksClient(object):
             order_by=order_by,
             page_size=page_size,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('parent', parent)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('parent', parent)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         iterator = google.api_core.page_iterator.GRPCIterator(
             client=None,
@@ -1227,10 +1322,17 @@ class CloudTasksClient(object):
             name=name,
             response_view=response_view,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('name', name)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('name', name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['get_task'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -1244,11 +1346,6 @@ class CloudTasksClient(object):
                     metadata=None):
         """
         Creates a task and adds it to a queue.
-
-        To add multiple tasks at the same time, use
-        `HTTP batching <https://cloud.google.com/storage/docs/json_api/v1/how-tos/batch>`_
-        or the batching documentation for your client library, for example
-        https://developers.google.com/api-client-library/python/guide/batch.
 
         Tasks cannot be updated after creation; there is no UpdateTask command.
 
@@ -1361,10 +1458,17 @@ class CloudTasksClient(object):
             task=task,
             response_view=response_view,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('parent', parent)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('parent', parent)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['create_task'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -1424,10 +1528,17 @@ class CloudTasksClient(object):
                 )
 
         request = cloudtasks_pb2.DeleteTaskRequest(name=name, )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('name', name)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('name', name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         self._inner_api_calls['delete_task'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -1493,8 +1604,12 @@ class CloudTasksClient(object):
                 ``lease_duration`` will be truncated to the nearest second.
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.tasks_v2beta2.types.Duration`
-            max_tasks (int): The maximum number of tasks to lease. The maximum that can be
-                requested is 1000.
+            max_tasks (int): The maximum number of tasks to lease.
+
+                The system will make a best effort to return as close to as
+                ``max_tasks`` as possible.
+
+                The largest that ``max_tasks`` can be is 1000.
             response_view (~google.cloud.tasks_v2beta2.types.View): The response_view specifies which subset of the ``Task`` will be
                 returned.
 
@@ -1574,10 +1689,17 @@ class CloudTasksClient(object):
             response_view=response_view,
             filter=filter_,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('parent', parent)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('parent', parent)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['lease_tasks'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -1602,11 +1724,6 @@ class CloudTasksClient(object):
         by a later ``LeaseTasks``,
         ``GetTask``, or
         ``ListTasks``.
-
-        To acknowledge multiple tasks at the same time, use
-        `HTTP batching <https://cloud.google.com/storage/docs/json_api/v1/how-tos/batch>`_
-        or the batching documentation for your client library, for example
-        https://developers.google.com/api-client-library/python/guide/batch.
 
         Example:
             >>> from google.cloud import tasks_v2beta2
@@ -1668,10 +1785,17 @@ class CloudTasksClient(object):
             name=name,
             schedule_time=schedule_time,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('name', name)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('name', name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         self._inner_api_calls['acknowledge_task'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -1778,10 +1902,17 @@ class CloudTasksClient(object):
             lease_duration=lease_duration,
             response_view=response_view,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('name', name)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('name', name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['renew_lease'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -1876,10 +2007,17 @@ class CloudTasksClient(object):
             schedule_time=schedule_time,
             response_view=response_view,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('name', name)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('name', name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['cancel_lease'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -1980,10 +2118,17 @@ class CloudTasksClient(object):
             name=name,
             response_view=response_view,
         )
-
-        routing_header = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-            [('name', name)], )
-        metadata.append(routing_header)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('name', name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header)
+            metadata.append(routing_metadata)
 
         return self._inner_api_calls['run_task'](
             request, retry=retry, timeout=timeout, metadata=metadata)
